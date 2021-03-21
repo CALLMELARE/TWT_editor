@@ -38,6 +38,13 @@ export default defineComponent({
   display: flex;
   justify-content: space-between;
   cursor: default;
+  
+  // Glassmorphism
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 32px 0 rgba(255, 255, 255, 0.658);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+
   .count {
     color: #808080;
     padding: 0 10px;
