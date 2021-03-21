@@ -2,6 +2,7 @@
   <div id="home">
     <textarea class="edit" :value="state.content" @input="update"></textarea>
     <div class="preview" v-html="compiledMd()"></div>
+    <func-bar :count="wordCount()" />
   </div>
 </template>
 
@@ -10,8 +11,10 @@ import { defineComponent, reactive } from "vue";
 import marked from "marked";
 import _ from "lodash";
 import "@/style/md.css";
+import FuncBar from "@/components/FuncBar.vue";
 
 export default defineComponent({
+  components: { FuncBar },
   name: "Home",
   props: {},
   setup() {
@@ -19,14 +22,33 @@ export default defineComponent({
       content: "# Welcome",
     });
 
+    // 编译markdown
     function compiledMd() {
       return marked(state.content, { sanitize: true });
+    }
+
+    // 字数统计
+    function wordCount() {
+      const pattern = /[a-zA-Z0-9_\u0392-\u03c9]+|[\u4E00-\u9FFF\u3400-\u4dbf\uf900-\ufaff\u3040-\u309f\uac00-\ud7af]+/g;
+      const m = state.content.match(pattern);
+      let count = 0;
+      if (m == null) {
+        return count;
+      }
+      for (let i = 0; i < m.length; i++) {
+        if (m[i].charCodeAt(0) >= 0x4e00) {
+          count += m[i].length;
+        } else {
+          count += 1;
+        }
+      }
+      return count;
     }
 
     const update = _.debounce((e: { target: { value: any } }) => {
       state.content = e.target.value;
     }, 100);
-    return { state, update, compiledMd };
+    return { state, update, compiledMd, wordCount };
   },
 });
 </script>
@@ -41,7 +63,7 @@ export default defineComponent({
   .preview {
     display: inline-block;
     width: 49%;
-    height: 100%;
+    height: calc(100% - 24px);
     vertical-align: top;
     box-sizing: border-box;
     padding: 0 20px;
