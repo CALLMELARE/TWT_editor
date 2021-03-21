@@ -1,7 +1,9 @@
 <template>
   <div id="func-bar">
     <span class="count">共{{ count }}字 &nbsp;</span>
-    <span class="version"> TWT Studio {{ getYear() }} </span>
+    <span class="version">
+      <router-link to="/About"> TWT Studio {{ getYear() }} </router-link>
+    </span>
   </div>
 </template>
 
@@ -44,6 +46,10 @@ export default defineComponent({
     cursor: pointer;
     color: #d9d9d9;
     font-size: 12px;
+    a {
+      color: #808080;
+      text-decoration: none;
+    }
   }
 }
 </style>

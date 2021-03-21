@@ -1,6 +1,7 @@
 <template>
   <div id="home">
-    <textarea class="edit" :value="state.content" @input="update"></textarea>
+    <div class="line-number">1<br />2<br /></div>
+    <textarea class="edit" :value="state.content" @input="update"> </textarea>
     <div class="preview" v-html="compiledMd()"></div>
     <func-bar :count="wordCount()" />
   </div>
@@ -62,11 +63,23 @@ export default defineComponent({
   .edit,
   .preview {
     display: inline-block;
-    width: 49%;
+    width: 48%;
     height: calc(100% - 24px);
     vertical-align: top;
     box-sizing: border-box;
     padding: 0 20px;
+  }
+  .line-number {
+    cursor: default;
+    min-width: 2%;
+    display: inline-block;
+    height: calc(100% - 24px);
+    vertical-align: top;
+    box-sizing: border-box;
+    padding: 20px 5px;
+    text-align: center;
+    line-height: 1.5;
+    font-size: 14px;
   }
   .edit {
     border: none;
@@ -76,6 +89,7 @@ export default defineComponent({
     background-color: #f6f6f6;
     font-size: 14px;
     font-family: "Monaco", courier, monospace;
+    line-height: 1.5;
     padding: 20px;
   }
   .preview {
