@@ -1,6 +1,7 @@
 <template>
   <div id="home">
     <div class="left">
+      <button @click="saveFile()">save</button>
       <textarea class="edit" :value="state.content" @input="update"> </textarea>
     </div>
     <div class="right">
@@ -15,6 +16,7 @@ import { defineComponent, reactive } from "vue";
 import _ from "lodash";
 import "@/style/md.css";
 import FuncBar from "@/components/FuncBar.vue";
+import { dialog } from "electron";
 const md = require("markdown-it")();
 const emoji = require("markdown-it-emoji");
 
@@ -34,6 +36,11 @@ export default defineComponent({
     // 编译markdown
     function compiledMd() {
       return md.render(state.content);
+    }
+
+    // 保存文件
+    function saveFile() {
+      
     }
 
     // 字数统计
@@ -58,7 +65,7 @@ export default defineComponent({
     const update = _.debounce((e: { target: { value: any } }) => {
       state.content = e.target.value;
     }, 100);
-    return { state, update, compiledMd, wordCount };
+    return { state, update, compiledMd, wordCount, saveFile };
   },
 });
 </script>
