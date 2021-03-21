@@ -1,7 +1,7 @@
 <template>
   <div id="home">
     <div class="left">
-      <button @click="saveFile()">save</button>
+      <!-- <button @click="saveFile()">save</button> -->
       <textarea class="edit" :value="state.content" @input="update"> </textarea>
     </div>
     <div class="right">
