@@ -9,13 +9,14 @@
 import { defineComponent, reactive } from "vue";
 import marked from "marked";
 import _ from "lodash";
+import "@/style/md.css";
 
 export default defineComponent({
   name: "Home",
   props: {},
   setup() {
     const state = reactive({
-      content: "# Hello",
+      content: "# Welcome",
     });
 
     function compiledMd() {
@@ -55,8 +56,8 @@ export default defineComponent({
     font-family: "Monaco", courier, monospace;
     padding: 20px;
   }
-  code {
-    color: #f66;
+  .preview {
+    padding: 20px;
   }
 }
 </style>
