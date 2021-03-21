@@ -1,6 +1,6 @@
 <template>
   <div id="home">
-    <div class="line-number">1<br />2<br /></div>
+    <div class="line-number" v-html="line()"></div>
     <textarea class="edit" :value="state.content" @input="update"> </textarea>
     <div class="preview" v-html="compiledMd()"></div>
     <func-bar :count="wordCount()" />
@@ -46,10 +46,21 @@ export default defineComponent({
       return count;
     }
 
+    // 行号
+    function line() {
+      const data = state.content.replace(/\r/gi, "").split("\n");
+      const n = data.length;
+      let num = "";
+      for (let i = 1; i <= n; i++) {
+        num += i + "<br>";
+      }
+      return num;
+    }
+
     const update = _.debounce((e: { target: { value: any } }) => {
       state.content = e.target.value;
     }, 100);
-    return { state, update, compiledMd, wordCount };
+    return { state, update, compiledMd, wordCount, line };
   },
 });
 </script>
