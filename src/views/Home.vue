@@ -17,7 +17,9 @@ import "@/style/md.css";
 import FuncBar from "@/components/FuncBar.vue";
 const md = require("markdown-it")();
 const emoji = require("markdown-it-emoji");
+
 md.use(emoji);
+md.use(require("markdown-it-highlightjs"));
 
 export default defineComponent({
   components: { FuncBar },
@@ -25,7 +27,8 @@ export default defineComponent({
   props: {},
   setup() {
     const state = reactive({
-      content: "# :rocket: Welcome to Markdown \n> You can write something here",
+      content:
+        "# :rocket: Welcome to Markdown \n> You can write something here",
     });
 
     // 编译markdown
