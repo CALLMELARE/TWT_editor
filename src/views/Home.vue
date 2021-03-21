@@ -1,8 +1,11 @@
 <template>
   <div id="home">
-    <div class="line-number" v-html="line()"></div>
-    <textarea class="edit" :value="state.content" @input="update"> </textarea>
-    <div class="preview" v-html="compiledMd()"></div>
+    <div class="left">
+      <textarea class="edit" :value="state.content" @input="update"> </textarea>
+    </div>
+    <div class="right">
+      <div class="preview" v-html="compiledMd()"></div>
+    </div>
     <func-bar :count="wordCount()" />
   </div>
 </template>
@@ -20,7 +23,7 @@ export default defineComponent({
   props: {},
   setup() {
     const state = reactive({
-      content: "# Welcome",
+      content: "# Welcome to Markdown \n> You can write something here",
     });
 
     // 编译markdown
@@ -46,21 +49,11 @@ export default defineComponent({
       return count;
     }
 
-    // 行号
-    function line() {
-      const data = state.content.replace(/\r/gi, "").split("\n");
-      const n = data.length;
-      let num = "";
-      for (let i = 1; i <= n; i++) {
-        num += i + "<br>";
-      }
-      return num;
-    }
-
+    // 防抖+根据内容渲染Markdown
     const update = _.debounce((e: { target: { value: any } }) => {
       state.content = e.target.value;
     }, 100);
-    return { state, update, compiledMd, wordCount, line };
+    return { state, update, compiledMd, wordCount };
   },
 });
 </script>
@@ -71,26 +64,18 @@ export default defineComponent({
   height: 100%;
   font-family: "Helvetica Neue", Arial, sans-serif;
   color: #333;
-  .edit,
-  .preview {
-    display: inline-block;
-    width: 48%;
-    height: calc(100% - 24px);
+  display: grid;
+  grid-template-columns: 50% 50%;
+  .left,
+  .right {
+    min-height: 100%;
+    overflow-y: auto;
     vertical-align: top;
     box-sizing: border-box;
-    padding: 0 20px;
+    width: 100%;
   }
-  .line-number {
-    cursor: default;
-    min-width: 2%;
-    display: inline-block;
-    height: calc(100% - 24px);
-    vertical-align: top;
-    box-sizing: border-box;
-    padding: 20px 5px;
-    text-align: center;
-    line-height: 1.5;
-    font-size: 14px;
+  .left {
+    display: flex;
   }
   .edit {
     border: none;
@@ -102,6 +87,9 @@ export default defineComponent({
     font-family: "Monaco", courier, monospace;
     line-height: 1.5;
     padding: 20px;
+    width: 100%;
+    height: auto;
+    overflow-y: visible;
   }
   .preview {
     padding: 20px;

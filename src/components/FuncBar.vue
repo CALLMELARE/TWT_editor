@@ -30,6 +30,8 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 #func-bar {
+  position: fixed;
+  bottom: 0;
   width: 100%;
   height: 24px;
   line-height: 24px;
