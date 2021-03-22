@@ -16,7 +16,6 @@ import { defineComponent, reactive } from "vue";
 import _ from "lodash";
 import "@/style/md.css";
 import FuncBar from "@/components/FuncBar.vue";
-import { dialog } from "electron";
 const md = require("markdown-it")();
 const emoji = require("markdown-it-emoji");
 
@@ -29,18 +28,12 @@ export default defineComponent({
   props: {},
   setup() {
     const state = reactive({
-      content:
-        "# :rocket: Welcome to Markdown \n> You can write something here",
+      content:"# :rocket: Welcome to Markdown \n> You can write something here",
     });
 
     // 编译markdown
     function compiledMd() {
       return md.render(state.content);
-    }
-
-    // 保存文件
-    function saveFile() {
-      
     }
 
     // 字数统计
@@ -65,8 +58,8 @@ export default defineComponent({
     const update = _.debounce((e: { target: { value: any } }) => {
       state.content = e.target.value;
     }, 100);
-    return { state, update, compiledMd, wordCount, saveFile };
-  },
+    return { state, update, compiledMd, wordCount };
+  }
 });
 </script>
 
