@@ -19,16 +19,21 @@
     <div class="content" v-if="state.tab == 1">
       <Md />
     </div>
+    <div class="content" v-if="state.tab == 2">
+      <Monaco />
+    </div>
   </div>
 </template>
 
 <script>
 import Md from "@/views/Markdown";
+import Monaco from "@/views/Monaco";
 import { defineComponent, reactive } from "vue";
 
 export default defineComponent({
   components: {
     Md,
+    Monaco,
   },
   setup() {
     const state = reactive({
