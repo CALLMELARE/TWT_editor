@@ -1,5 +1,5 @@
 <template>
-  <div id="home">
+  <div class="home">
     <div class="left">
       <!-- <button @click="saveFile()">save</button> -->
       <textarea class="edit" :value="state.content" @input="update"> </textarea>
@@ -64,7 +64,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-#home {
+.home {
   margin: 0;
   height: 100%;
   font-family: "Helvetica Neue", Arial, sans-serif;

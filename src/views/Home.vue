@@ -36,9 +36,6 @@ export default defineComponent({
     });
     return { state };
   },
-  methods: {
-    switch() {},
-  },
 });
 </script>
 
