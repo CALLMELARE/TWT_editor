@@ -26,15 +26,10 @@
     "markdown-it-emoji": "^2.0.0",
     "markdown-it-highlightjs": "^3.4.0",
     "markdown-it-katex": "^2.0.3",
-    "marked": "^2.0.1",
     "monaco-editor": "^0.23.0",
-    "showdown": "^1.9.1",
-    "showdown-katex": "^0.8.0",
-    "tailwindcss": "^2.0.3",
     "vue": "^3.0.0",
     "vue-class-component": "^8.0.0-0",
-    "vue-router": "^4.0.0-0",
-    "vuetify": "^2.4.7"
+    "vue-router": "^4.0.0-0"
   },
   "devDependencies": {
     "@types/electron-devtools-installer": "^2.2.0",
